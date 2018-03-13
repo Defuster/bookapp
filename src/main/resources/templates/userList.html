@@ -9,28 +9,23 @@
 
 </head>
 <body>
-	User: <span sec:authentication="name">no-name</span>
+	User: <span sec:authentication="name">user</span>
 	Role: <span sec:authentication="principal.authorities">[USER, ADMIN]</span>
 	
 	<table class="table table-striped">
 	<tr>
-		<th>id</th>
-		<th>Author</th>
-		<th>isbn</th>
-		<th>Year</th>
+		<th>Username</th>
+		<th>Password Hash</th>
+		<th>Role</th>
+		<th>Email</th>
 	</tr>
-    <tr th:each="book : ${books}">
-        <td th:text="${book.id}">1</td>
-        <td th:text="${book.author}">author</td>
-        <td th:text="${book.isbn}">isbn</td>
-        <td th:text="${book.year}">year</td>
-        <div sec:authorize="hasRole('ADMIN')">
-        <td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
-        </div>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.username}">käyttäjätunnus</td>
+        <td th:text="${user.passwordHash}">salasanaHash</td>
+        <td th:text="${user.role}">role</td>
+        <td th:text="${user.email}">email</td>
     </tr>
     </table>
-    <a class="btn btn-success" href="/addBook">Add book</a>
-    <a class="btn btn-danger" href="/userList">User list</a>
     
     <div sec:authorize="isAuthenticated()">
     <br/>
